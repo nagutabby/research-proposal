@@ -1,0 +1,8 @@
+from_owner:
+  - nagutabby
+required_labels:
+  - ready
+apply_labels:
+  - merge
+blacklisted_labels:
+  - wip
