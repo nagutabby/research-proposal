@@ -53,10 +53,6 @@
 %
 %
 
-
-% citeに関して
-\usepackage{cite}
-
 % SI単位用のパッケージ
 \usepackage{siunitx}
 
@@ -113,3 +109,10 @@
 
 % tcolorbox
 \usepackage{tcolorbox}
+
+\usepackage{newunicodechar}
+\newunicodechar{、}{，}
+\newunicodechar{。}{．}
+
+\usepackage{biblatex}
+\addbibresource{references.bib}
