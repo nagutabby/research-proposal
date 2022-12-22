@@ -1,11 +1,2 @@
+/out/
 .DS_Store
-
-*.aux
-*.bbl
-*.bcf
-*.blg
-*.fdb_latexmk
-*.fls
-*.log
-*.out
-*.xml
