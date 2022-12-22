@@ -62,9 +62,6 @@
 \usepackage{mathtools}
 \mathtoolsset{showonlyrefs=true}
 
-% ルビを使う
-\usepackage{pxrubrica}
-
 % subfigure
 \usepackage[hang,small,bf]{caption}
 \usepackage[subrefformat=parens]{subcaption}
@@ -74,10 +71,9 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\usepackage[luatex,pdfencoding=auto]{hyperref}
+\usepackage[]{hyperref}
 \hypersetup{%
   bookmarksnumbered=true,%
-  %colorlinks=true,%
   colorlinks=false,%
   pdftitle={タイトル},%
   pdfauthor={作成者},%
@@ -110,9 +106,11 @@
 % tcolorbox
 \usepackage{tcolorbox}
 
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+\usepackage[utf8]{inputenc}
+
 \usepackage{newunicodechar}
 \newunicodechar{、}{，}
 \newunicodechar{。}{．}
-
-\usepackage{biblatex}
-\addbibresource{references.bib}
