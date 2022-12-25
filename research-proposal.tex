@@ -1,226 +1,156 @@
 \documentclass[twocolumn,article]{jlreq}
-\usepackage{sbase-prop}
-\usepackage[top=15mm, left=15mm, right=15mm, bottom=15mm, includefoot]{geometry}
+\usepackage[top=15mm, left=15mm, right=15mm, bottom=15mm]{geometry}
 
-%------------------------------
-\title{ここにタイトルを書く長いときは\\このようにして2行目に書く}%
-\author{名字~氏名}%
-%\author{名字~氏名\\所属}%
-%\author{名字~氏名\thanks{E-mail: HogeHoge@hoge.ac.jp}\\所属}%
-%\date{}%							空白にすることで省略可能
+\usepackage{siunitx}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs=true}
 
-%\date{\today}%
+\usepackage[hang,small,bf]{caption}
+\usepackage[subrefformat=parens]{subcaption}
+\captionsetup{compatibility=false}
+\captionsetup[subfigure]{labelformat=simple}
+\renewcommand*{\thesubfigure}{(\alph{subfigure})}
 
+\usepackage[]{hyperref}
+\hypersetup{
+  bookmarksnumbered=true,
+  colorlinks=false,
+  pdftitle={タイトル},
+  pdfauthor={作成者},
+  pdfsubject={サブタイトル},
+  pdfkeywords={キーワード1;キーワード2;キーワード3;}
+} 
+
+\newcommand{\MyChapter}[1]{\chapter{#1}}
+\newcommand{\MySection}[1]{\section{#1}}
+\newcommand{\MySubSection}[1]{\subsection{#1}}
+\newcommand{\MySubSubSection}[1]{\subsubsection{#1}}
+
+\newcommand{\MyChapRef}[1]{第~\ref{#1}~章}
+\newcommand{\MySecRef}[1]{第~\ref{#1}~節}
+\newcommand{\MySubSecRef}[1]{第~\ref{#1}~項}
+\newcommand{\MySubSubSecRef}[1]{第~\ref{#1}~項}
+\newcommand{\MyFigRef}[1]{図~\ref{#1}}
+\newcommand{\MyTabRef}[1]{表~\ref{#1}}
+\newcommand{\MyEqRef}[1]{式~\eqref{#1}}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,positioning,shapes,arrows}
+\usepackage{circuitikz}
+
+\usepackage{tcolorbox}
+
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{newunicodechar}
+\newunicodechar{、}{，}
+\newunicodechar{。}{．}
+
+\title{暗号化されたDNSトラフィックのデータによる\\悪意のあるWebサイトの分類}
+\author{笹川~尋翔}
+
+\date{\today}
 
 \begin{abstract}
-おおむね5行程度で背景と目的，手段，それによって何がどうなるのかを簡潔に記述する．
-おおむね5行程度で背景と目的，手段，それによって何がどうなるのかを簡潔に記述する．
-おおむね5行程度で背景と目的，手段，それによって何がどうなるのかを簡潔に記述する．
-おおむね5行程度で背景と目的，手段，それによって何がどうなるのかを簡潔に記述する．
-おおむね5行程度で背景と目的，手段，それによって何がどうなるのかを簡潔に記述する．
-おおむね5行程度で背景と目的，手段，それによって何がどうなるのかを簡潔に記述する．
+ユーザのプライバシーの保護やセキュリティの強化のために、DNSトラフィックの暗号化技術が普及している。
+一方で、DNSトラフィックの暗号化は、それが悪意のあるWebサイトの通信に使用されているかどうかを判別することを困難にしている。
+この研究では、暗号化されたパケットに含まれる平文のデータなどを用いて、悪意のあるWebサイトの種類を分類するモデルを構築し、評価する。
+最後に、この仕組みが解決する課題と、今後解決するべき問題点を述べる。
 \end{abstract}
 
-%------------------------------
 
 \begin{document}
 
-% ここから本文
-
-\maketitle%					%abstactより後にmaketitleを置くと，アブストラクトだけ段組にならない
+\maketitle
 
 \section{はじめに}\label{sec:intro}
-段落を変えるときは以下のようにする．
+最初に普及した、UDPの53番ポートで行われる名前解決では、平文のデータが通信に用いられる。
+攻撃者は、平文のDNSパケットのデータを閲覧することで、リクエストとレスポンスの平文のデータを取得し、悪用することができる。
+これを踏まえ、DNSトラフィックを暗号化する技術であるDNS over TLS(DoT)、 DNS over HTTPS(DoH)、DNS over QUIC(DoQ)の活用が進められている。
 
-はじめに背景や研究の目的，見通しや手段をできる限り簡潔に記述する．
-
-技術的な課題もこの節で述べておく．
-
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-
+しかし、既存のIPSなどのシステムでは、暗号化されたDNSパケットを用いて不正を検知することが困難である。
+これは、暗号化されたDNSパケットにおいて、リクエストとレスポンスのデータが暗号化されており、検知のために利用できるデータが少ないためである。
 
 \section{関連研究}\label{sec:relation}
-本稿との関連する従来の研究や，
-他のグループなどで発表されている内容と，
-自分の研究内容を関連させ，
-本稿では何を狙っているのか，関連研究との差異はどこにあるのかを説明する．
-関連する研究を掲載する場合は参考文献に記述し参照しておく
+2021年に行われたDNSの暗号化に関する調査\theendnotes[1]{}では、暗号化されたDNSトラフィックから得られるデータを用いて、接続先のWebサイトが悪意のあるWebサイトであるかどうかの2値に分類する手法が存在することが分かっている。
+しかし、暗号化されたDNSトラフィックを利用してアクセスしたWebサイトが、悪意のあるものであった際に、そのWebサイトの種類を予測する手法はまだ存在しない。
+悪意のあるWebサイトの種類とは、例えば、偽のWebサイト(フィッシングサイト)や、マルウェアを含むWebサイトなどである。
 
-研究内容に関連する技術について解説することがあればここで書いておく．
+\section{研究内容}
+DoTとDoHをサポートしているパブリックDNSを利用するための設定をする。
+Postfixでメールサーバを構築し、フィッシングサイトに誘導するためのスパムメールを収集する。
+また、Cowrieを利用して、マルウェアを配布しているドメインのデータを収集する。
+暗号化されたDNSパケットに含まれる、送信元IPアドレス、宛先IPアドレス、問い合わせたレコードの種類などの平文のデータをWiresharkで収集する。
+DNSトラフィックのメトリクスを収集するツールとして、DNStrace\theendnotes[2]{}ツールを使用する。
+DNSの暗号化を有効にしたクライアントで、悪意のあるWebサイトに対してリクエストを送ることでレイテンシやDNSトラフィックなどのメトリクスを収集する。
 
-\LaTeX 文書中で表や図の参照を入れたいときはとのようにする．
-複数の図を$1$つにまとめたいときはのように，とのようにする．
-また，数式に関してはのように書く．
-\begin{align}
-  \label{eq:normal-distribution}
-  \begin{aligned}
-    f(x)=\frac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left( - \frac{\left( x - \mu \right)^2}{2\sigma^2} \right)
-  \end{aligned}
-\end{align}
+次に、統計処理したデータに対して機械学習による分類を行う。
+この分類では、DNSトラフィックから得られるデータを説明変数とし、悪意のあるWebサイトの種類を目的変数とする。
 
+最後に、構築したモデルから算出される評価指標によって、モデルの性能を評価する。
 
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
+\subsection{DNSの暗号化技術の選択}
+現在実用化されているDNSの暗号化技術は複数存在する。
+DoTは、通信を確立する際にTLSを利用することで、安全な通信を実現する。
+DoHは、DoTと同様にTLSを利用するが、HTTPSプロトコルを利用するため、そのトラフィックが他のHTTPSトラフィックに紛れ込みやすく、より安全であるとされる。
+DoQはLTS、HTTP/2、UDPを利用してDoTやDoHよりも高速な通信ができるように設計されている。
 
+DoT、DoH、DoQのいずれも、1つ以上のパブリックDNSで利用できる技術であるが、特にDoTやDoHはGoogleSやCloudflareなどの多くのパブリックDNSプロバイダがサポートしている。
+そのため、この研究ではDoTやDoHを利用してデータを収集する。
 
-\section{研究内容}%%change later
-研究内容について書く．
+\subsection{Postfixによるフィッシングメールの収集}
+IMAP4を用いてメールを受信するようにメールサーバを設定する。
+Gmail\theendnotes[3]{}などの一部のソフトウェアは、平文での通信を行うIMAP4を使用できないため、それらのプロトコルを使用できるThunderbird\theendnotes[4]{}を電子メールクライアントとして使用する。
 
-\subsection{小節の書き方}
-\LaTeX ではsubsectionを用いて小節を記述する．
+\subsection{Cowrieによるマルウェア配布サイトの収集}
+Cowrie\theendnotes[5]{}はハニーポットの一種であり、SSH、Telnetプロトコルを利用した攻撃を収集して分析することができる。
+これを使用して、攻撃者がマルウェアをダウンロードした際のURLを記録し、それを元にそれぞれのドメインのDNSトラフィックのデータを収集する。
 
-\subsubsection{小々節の書き方}
-\LaTeX ではsubsubsectionを用いて小々節を記述する．
-
-\subsection{注意点}
-要旨の作成において，次の$4$つに注意し作成せよ.
-\begin{enumerate}
-  \item 各セクションの名前は適宜変更する
-  \item すべてのファイルは卒論をまとめるときに用いるので，各自管理しておく
-  \item 画像を作成する場合は，画像内の文章は英語フォントのTimes系や一般的なフォントを用いる
-  \item 「、や。」ではなく全角の「，や．」を用いる
-  \item 体言止めは使用しない
-\end{enumerate}
+\subsection{DNStraceによるDNSトラフィックのメトリクスの計測}
+DNStraceでは、ネームサーバへ名前解決要求を繰り返し行い、レイテンシの分布を計測することができる。
+A、AAAA、TXTレコードに対して、名前解決要求を100回行い、それぞれのレイテンシの分布を統計量として求める。
 
 
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-
-
-
+\subsection{分類手法の選択}
+最適な分類手法は、データの分布により異なる。
+ロジスティック回帰分析、k近傍法、サポートベクターマシン、決定木は、データの散らばりが大きい場合でも比較的高い精度で分類できる。
+この研究では、モデルの説明のしやすさと実装のしやすさを重視し、決定木のアンサンブル学習の手法であるランダムフォレストと勾配ブースティング決定木を利用する。
 
 \section{評価方法}
-提案する研究はどのように評価するのか記述する．
-
-提案内容によっては評価方法は未定でも構わない．
-
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-
+分類の性能を評価するために用いる指標を決める際には、偽陽性率と偽陰性率の中からどの比率を重視するかを考慮する。
+この研究では、偽陽性率と偽陰性率の両方を重視するため、評価指標の1つとしてF値を用いる。
+その他の指標として、予測の確実性を算出するためにLogLossを用い、分類の正確さを算出するために正解率を用いる。
+また、データの分布をヒストグラムによって視覚化して比較することで、それぞれのデータの傾向を考察する。
 
 \section{研究結果}
-どのような結果が予想できるのか記述する．
-研究内容によっては結果の予測はできない場合もある．
+ボットネットでは、オリジンサーバを隠蔽するためにTTLの値が小さく設定されていたり、ファストフラックスと呼ばれるIPアドレスの関連付けを高速に切り替える手法が使用されていたりする場合がある。
+そのため、マルウェアを含むWebサイトと分類される場合の特徴的なデータは、レイテンシとゾーン情報であると考えられる。
 
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
+偽のWebサイトは、マルウェアを含むWebサイトと比べてWebサイトのコンテンツが非常に多く、その分、1アクセスあたりの負荷が高いことが考えられる。
+また、DDNSを利用したフィッシングサイトが多いことから、特定のネームサーバはフィッシングサイトに使われやすい可能性がある。
+そのため、偽のWebサイトと分類される場合の特徴的なデータは、レイテンシやネームサーバの種類であると考えられる。
+
 
 \section{まとめ}
-まとめとして，本稿の内容を凝縮し，簡潔に述べる．
+暗号化されたDNSトラフィックを利用して悪意のあるWebサイトの種類を分類することで、DNSトラフィックを暗号化した高度な攻撃を分析しやすくなると考えられる。
 
-また，今後の課題などを述べる．
+\section*{参考文献}
+% \printbibliography
 
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
-最終提出のリサーチプロポーザルではこのくらい記述する．
+\theendnotes[1]{MINZHAO LYU, HASSAN HABIBI GHARAKHEILI, and VIJAY SIVARAMAN, 2021. A Survey on DNS Encryption: Current Development, Malware Misuse, and Inference Techniques, https://dl.acm.org/doi/epdf/10.1145/3547331}
 
+\theendnotes[2]{https://github.com/redsift/dnstrace}
 
+\theendnotes[3]{https://www.google.com/intl/ja/gmail/about/}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%
-%%%%		表の挿入
-%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%	{\tabcolsep = 2mm%%		表の横幅余白
-%	  {\renewcommand\arraystretch{1.2}
-\begin{table}[tbp]\centering\caption{表のタイトル}\label{tab:parameters}
-  \begin{tabular}{c|c}\hline					%{c|c} で表の要素の配置を決める．
-    目的                 & 方法                    \\ \hline %\hline 
-    数式を書きたい       & $ここ$ のように\$で囲む \\
-    表を作りたい         & table環境を使う         \\
-    画像を挿入したい     & figure環境を使う        \\
-    注脚をつけたい       & footnoteを使う          \\
-    細かい設定を変えたい & 自分で調べる~           \\
-    \hline
-  \end{tabular}
-\end{table}
-%\end{spacing}
-%}			%\renewcommand\arraystretch{}の綴じ
-%}			%\tabcolsepの綴じ
+\theendnotes[4]{https://www.thunderbird.net/ja/}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%
-%%%%		 図の挿入
-%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-\begin{figure}[tbp]\centering
-\end{figure}
-%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%
-%%%%		 複数の図の挿入（subfigure）
-%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[tbp] \centering
-  \begin{subfigure}[b]{0.45\columnwidth}\centering
-  \end{subfigure}
-  \begin{subfigure}[b]{0.45\columnwidth}\centering
-  \end{subfigure}
-  \caption{\texttt{subfigure}の使い方}
-  \label{fig:demo}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%
-%%%%		 外部ファイルからの参考文献の挿入（bibtex）
-%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-\bibliographystyle{junsrt}		%出てきた順索引 
-%\bibliographystyle{jplain}		%アルファベット順索引
-\bibliography{Ref}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%
-%%%%		 直接入力の参考文献の挿入（bibtex）
-%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-%---------------------------------
-%\begin{thebibliography}{9}
-%\bibitem{skmtlab} SakamotoLab., \url{http://sskmtlab.mydns.jp/}, （最終アクセス日：2021年12月24日）.
-%\bibitem{google} Google Inc., \url{http://www.google.com/}, （最終アクセス日：2021年12月24日）.
-%\end{thebibliography}
-%---------------------------------
-%\begin{flushright}
-%{\bfseries 指導教官[坂本~真仁]}
-%\end{flushright}
-
+\theendnotes[5]{https://github.com/cowrie/cowrie}
 
 \end{document}
 
